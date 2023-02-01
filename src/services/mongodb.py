@@ -5,7 +5,7 @@ from src.config import ENVIRONMENT_VARIABLES
 class MongoDBService:
     def __init__(self):
         self.client = pymongo.MongoClient(
-            "mongodb://MONGO_USERNAME:MONGO_PASSWORD@gabrieworks-dev-vm-compoment.gabrieworks.com:27018/",
+            ENVIRONMENT_VARIABLES["MONGO_ENDPOINT"],
             uuidRepresentation="standard")
         database = f"db{ENVIRONMENT_VARIABLES['ENV']}"
         self.mongo_db = self.client[database]

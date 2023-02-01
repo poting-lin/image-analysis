@@ -5,7 +5,7 @@ from src.config import ENVIRONMENT_VARIABLES
 class MessagesRepository:
     def __init__(self):
         self.client = pymongo.MongoClient(
-            "mongodb://MONGO_USERNAME:MONGO_PASSWORD@gabrieworks-dev-vm-compoment.gabrieworks.com:27018/")
+            ENVIRONMENT_VARIABLES["MONGO_ENDPOINT"])
         database = f"db{ENVIRONMENT_VARIABLES['ENV']}"
         self.mongo_db = self.client[database]
 

@@ -2,7 +2,7 @@
 version: "3.8"
 
 services:
-  gabrieworks-service-documents:
+  service-image-analysis:
     image: devcontainerregistry.azurecr.io/serviceimageanalysis:latest
     ports:
       - 80:80
