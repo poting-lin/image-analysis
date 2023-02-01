@@ -84,5 +84,3 @@ make sure you have a .env file including above content in root folder.
 
 #### 3. generate unit tst report
 pytest --junitxml=junit/test-results.xml --cov=src --cov-report=xml --cov-report=html filename
-
-coverage html filename
