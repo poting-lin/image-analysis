@@ -1,5 +1,4 @@
-
-# Documents service
+# Image Analysis service
 This is a service to trigger image analysis process.
 
 
