@@ -1,7 +1,7 @@
 # Image Analysis service
 This is a service to trigger image analysis process.
 
-# Concept of the project
+### Concept of the project
 - By isolating the data in data lakes: raw, stage, and result to make the workflow more transparent with Minio.
 - Make prediction(analysis) with the model on demand
 
