@@ -1,0 +1,8 @@
+#https://docs.docker.com/compose/compose-file/
+version: "3.8"
+
+services:
+  gabrieworks-service-documents:
+    image: devcontainerregistry.azurecr.io/serviceimageanalysis:latest
+    ports:
+      - 80:80

@@ -1,0 +1,15 @@
+# dev-tools
+-c requirements.txt
+pipdeptree
+pip-conflict-checker
+pylint
+pytest
+pytest-cov
+mypy
+pytest-env
+autopep8
+black==20.8b1	
+flake8
+pip-tools
+pytest
+pytest-cov

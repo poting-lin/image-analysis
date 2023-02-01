@@ -1,0 +1,58 @@
+# Global ignores (should actually be in ~/.gitignore)
+.DS_Store
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+
+# Unit test / coverage reports
+htmlcov/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/+
+test-output.xml
+test-results.xml
+results.xml
+
+# Environments
+.env
+.venv
+.venv-new
+venv-new/
+env/
+venv/   
+ENV/
+env.bak/
+venv.bak/
+.python-version
+.mypy_cache/
+
+# Azure Functions artifacts
+bin
+obj
+.python_packages
+.funcignore
+
+#IDE
+.vscode
+.idea
+
+#Helm
+*.lock
+
+#Airflow
+logs
+airflow
+
+#Misc
+*.log
+setup.py

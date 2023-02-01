@@ -1,0 +1,641 @@
+openapi: "3.0.2"
+info:
+  title: PROM Documents APIs
+  version: "1.0"
+servers:
+  - url: https://api.dev.onpromtronics.com/api/documents
+paths:
+  /users:
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - Users
+      summary: Register a new user
+      description: Register a new user
+      requestBody:
+        description: Register a new user
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UsersRequest"
+      responses:
+        "201":
+          description: The resource was created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userResponse"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/badRequestResponse"
+  /credentials:
+    post:
+      tags:
+        - Credentials
+      summary: Get token to a user of a Tenant
+      description: Get token to a user of a Tenant
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                userEmail:
+                  type: string
+                  format: email
+                userPassword:
+                  type: string
+                  format: password
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/filteredUsersResponse"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/badRequestResponse"
+  /datasets:
+    post:
+      tags:
+        - Datasets
+      summary: Upload a dataset
+      description: Upload a dataset
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                fileField:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        "200":
+          description: The resource was created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/filesUploadResponse"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/badRequestResponse"
+    get:
+      summary: Get the dataset list belong to the user
+      tags:
+        - Datasets
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/datasetsResponse"
+  /analysis:
+    post:
+      tags:
+        - Analysis
+      description: analysis dataset
+      requestBody:
+        description: analysis dataset
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnalysisRequest"
+      responses:
+        "201":
+          description: The resource was triggered successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/analysisResponse"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/badRequestResponse"
+    get:
+      summary: Get the analysis list belong to the user
+      tags:
+        - Analysis
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/datasetsResponse"
+  /qualityreports:
+    post:
+      tags:
+        - QualityReports
+      description: quality reports
+      responses:
+        "200":
+          description: The resource was triggered successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/qualityReportsResponse"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/badRequestResponse"
+    get:
+      summary: Get the qualityreport list belong to the user
+      tags:
+        - QualityReports
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/datasetsResponse"
+  /etl/{id}:
+    post:
+      summary: Trigger a etl pipeline
+      tags:
+        - ETL
+      description: trigger ETL pipeline
+      parameters:
+        - in: path
+          name: id
+          description: Document Id
+          schema:
+            type: string
+            format: uuid
+          required: true
+      responses:
+        "201":
+          description: The resource was triggered successfully and started.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EtlsResponse"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/badRequestResponse"
+  /healthcheck:
+    get:
+      summary: Get the health status of the service
+      tags:
+        - Health Check
+      parameters:
+        - name: throwException
+          in: query
+          description: Flag to throw log exception for testing
+          schema:
+            type: string
+          example: True
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/healthCheckrequestStatusResponse"
+        400:
+          description: Bad request
+  /readiness:
+    get:
+      summary: Validate configurations of the service
+      tags:
+        - Health Check
+      parameters:
+        - name: throwException
+          in: query
+          description: Flag to throw log exception for testing
+          schema:
+            type: string
+          example: True
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/readinessrequestStatusResponse"
+        503:
+          description: "Service Unavailable"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/readinessrequestStatusFailedResponse"
+  /instruments/query:
+    post:
+      tags:
+        - Instruments
+      summary: query a instrument
+      description: Create a instrument
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InstrumentRequest"
+      responses:
+        "200":
+          description: The action was successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InstrumentsResponse"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/badRequestResponse"
+  /instruments:
+    post:
+      tags:
+        - Instruments
+      summary: Create a instrument
+      description: Create a instrument
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InstrumentRequest"
+      responses:
+        "200":
+          description: The resource was created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InstrumentsResponse"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/badRequestResponse"
+    get:
+      summary: Get the instrument list belong to the user
+      tags:
+        - Instruments
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InstrumentsListResponse"
+  /instruments/{id}:
+    put:
+      tags:
+        - Instruments
+      summary: Updating a instrument
+      description: Updating a instrument
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: string
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InstrumentRequest"
+      responses:
+        "200":
+          description: The resource was created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InstrumentsResponse"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/badRequestResponse"
+    get:
+      summary: Get the intstrument list belong to the user
+      tags:
+        - Instruments
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: string
+          required: true
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InstrumentsResponse"
+    delete:
+      summary: Delete the intstrument list belong to the user
+      tags:
+        - Instruments
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: string
+          required: true
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteResponse"
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    DeleteResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          example: 202
+        message:
+          type: string
+          example: "request accepted"
+    badRequestResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 400
+        message:
+          type: string
+          example: the resource you request is invalid
+    EtlsResponse:
+      type: object
+      properties:
+        documentId:
+          type: string
+          format: uuid
+        status:
+          type: string
+          description: the status of etl pipeline
+    filesUploadResponse:
+      type: object
+      properties:
+        ststuaCode:
+          type: integer
+          example: 200
+        message:
+          type: object
+          properties:
+            datasetId:
+              type: string
+              format: uuid
+              example: "804c6caf-aa53-4887-879a-59c19baf4a6d"
+            fileList:
+              type: string
+              example:
+                [
+                  "image_001.csv",
+                  "overview.tiff",
+                  "COORD_00-00__Tile_r004_c013processed.tiff",
+                ]
+
+    UsersRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          format: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+    datasetsResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 200
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              path:
+                type: string
+                format: string
+                example: "006a0900-730f-4c1c-b12b-d6c75598517d/COORD_00-00__Tile_r008_c014_18-02-065-8bit-Coord-Param.csv"
+              etag:
+                type: string
+                format: string
+                example: "77a297b6b448d2c465ee4eb9c8485f1b"
+              lastModified:
+                type: string
+                format: date-time
+                example: "2022-09-15 08:15:06.292000+00:00"
+              isDir:
+                type: boolean
+                example: false
+              size:
+                type: number
+                example: 1234
+    analysisResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 200
+        message:
+          type: object
+          properties:
+            analysisId:
+              type: string
+            modelId:
+              type: string
+              format: uuid
+            datasetId:
+              type: string
+              format: uuid
+            totalItems:
+              type: integer
+    qualityReportsResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 200
+        message:
+          type: array
+          items:
+            type: object
+            properties:
+              analysisId:
+                type: string
+              datasetId:
+                type: string
+                format: uuid
+    healthCheckrequestStatusResponse:
+      type: string
+      example: "OK"
+    readinessrequestStatusResponse:
+      type: object
+      properties:
+        MissingConfigurations:
+          type: string
+          example: ""
+        Succeed:
+          type: boolean
+          example: True
+    readinessrequestStatusFailedResponse:
+      type: object
+      properties:
+        MissingConfigurations:
+          type: string
+          example: "SQLUsername"
+        Succeed:
+          type: boolean
+          example: False
+    filteredUsersResponse:
+      type: object
+      properties:
+        token:
+          type: string
+    userResponse:
+      type: object
+      properties:
+        userId:
+          type: string
+          format: uuid
+        email:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        isActive:
+          type: boolean
+          description: "True if the user has completed sign up. False if user has been invited only but not signed up yet."
+    AnalysisRequest:
+      type: object
+      properties:
+        modelId:
+          type: string
+          format: uuid
+          example: "804c6caf-aa53-4887-879a-59c19baf4a6d"
+        datasetId:
+          type: string
+          format: uuid
+          example: "75c9b922-4af7-44fc-a0f1-1b2e2ae62f2b"
+    InstrumentRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          format: string
+        owner:
+          type: string
+          format: string
+        inventoryNumber:
+          type: string
+          format: string
+
+    InstrumentsResponse:
+      type: object
+      properties:
+        statusCode:
+          type: string
+          format: number
+          example: 200
+        message:
+          type: string
+          format: number
+          example: "request succeed"
+        data:
+          type: object
+          properties:
+            instrumentId:
+              type: string
+              format: uuid
+            name:
+              type: string
+              description: name of the instrument
+            owner:
+              type: string
+              description: owner of the instrument
+            inventoryNumber:
+              type: string
+              description: inventory number of the instrument
+            createdAt:
+              type: string
+              format: date-time
+              description: creating datetime of the instrument
+            lastUpdatedAt:
+              type: string
+              format: date-time
+              description: updating datetime of the instrument
+        totalCount:
+          type: number
+          example: 1
+    InstrumentsListResponse:
+      type: object
+      properties:
+        statusCode:
+          type: string
+          format: number
+          example: 200
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstrumentsData'
+        totalCount:
+          type: number
+          example: 1
+    InstrumentsData:
+      type: object
+      properties:
+        instrumentId:
+          type: string
+          format: uuid
+        name:
+          type: string
+          description: name of the instrument
+        owner:
+          type: string
+          description: owner of the instrument
+        inventoryNumber:
+          type: string
+          description: inventory number of the instrument
+        createdAt:
+          type: string
+          format: date-time
+          description: creating datetime of the instrument
+        lastUpdatedAt:
+          type: string
+          format: date-time
+          description: updating datetime of the instrument
+        totalCount:
+          type: number
+          example: 1
