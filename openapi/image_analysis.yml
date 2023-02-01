@@ -1,9 +1,9 @@
 openapi: "3.0.2"
 info:
-  title: PROM Documents APIs
+  title: Image Analysis APIs
   version: "1.0"
 servers:
-  - url: https://api.dev.onpromtronics.com/api/documents
+  - url: https://api.dev.onimagyanalysis.com/api/imageanalysis
 paths:
   /users:
     post:

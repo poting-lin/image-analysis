@@ -20,9 +20,5 @@ case $arg in
         pylint -d R,C src;;
     "check")
         pylint -E src;;
-    "type")
-        mypy src;;
-    "snyk")
-        snyk test;;
     *) ;;
 esac

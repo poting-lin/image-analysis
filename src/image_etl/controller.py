@@ -25,6 +25,6 @@ class EtlController():
         etl_service = EtlService()
         df, file_name = etl_service.get_all_objects_in_raw()
         etl_service.raw_to_stage(df, file_name)
-        etl_service.stage_to_zdmp_ai_designer(df, file_name)
+        etl_service.stage_to_ai_designer(df, file_name)
         return JSONResponse(
             status_code=HTTPStatus.OK, content=f"The csv files merge and save in stage, copy to AI designer succeed, document Id: {document_id}")
