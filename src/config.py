@@ -13,11 +13,11 @@ ENVIRONMENT_VARIABLES = {
     "BUCKET_RAW": "raw",
     "BUCKET_STAGE": "stage",
     "BUCKET_RES": "res",
-    "MINIO_ENDPOINT": "MINIO_URL",
-    "MINIO_ACCESS_KEY": "MINIO_USERNAME",
-    "MINIO_SECRET_KEY": "MINIO_SECRET_KEY",
+    "MINIO_ENDPOINT": os.getenv("MINIO_URL"),
+    "MINIO_ACCESS_KEY": os.getenv("MINIO_USERNAME"),
+    "MINIO_SECRET_KEY": os.getenv("MINIO_SECRET_KEY"),
     "ALLOWED_EXTENSIONS": set(['csv', 'tiff']),
-    "MONGO_ENDPOINT": "MONGO_URL",
+    "MONGO_ENDPOINT": os.getenv("MONGO_URL"),
 }
 
 
