@@ -1,17 +1,17 @@
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from src.image_etl import controller as EtlController
-from src.image_datasets import controller as DatasetsController
-from src.image_datasets import list_controller as DatasetsListController
-from src.image_predictions import controller as PredictionsController
-from src.image_analysis import controller as AnalysisController
-from src.image_quality_reports import controller as QualityReportsController
-from src.image_quality_reports import list_controller as QualityReportsListController
-from src.image_http_health_check import controller as HealthCheckController
-from src.image_messages import controller as MessagesController
-from src.image_experiments import controller as ExperimentsController
-from src.image_experiments import list_controller as ExperimentsListController
+from src.controllers import etl_controller as EtlController
+from src.controllers import datasets_controller as DatasetsController
+from src.controllers import datasets_list_controller as DatasetsListController
+from src.controllers import predictions_controller as PredictionsController
+from src.controllers import analysis_controller as AnalysisController
+from src.controllers import quality_reports_controller as QualityReportsController
+from src.controllers import quality_reports_list_controller as QualityReportsListController
+from src.controllers import health_check_controller as HealthCheckController
+from src.controllers import messages_controller as MessagesController
+from src.controllers import experiments_controller as ExperimentsController
+from src.controllers import experiments_list_controller as ExperimentsListController
 
 app = FastAPI()
 
