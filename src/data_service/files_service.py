@@ -9,7 +9,7 @@ from src.config import ENVIRONMENT_VARIABLES
 class FileService():
     def __init__(self):
         """Initial shared data"""
-        self.client = Minio(ENVIRONMENT_VARIABLES["MINIO_ENDPOINT"],
+        self.client = Minio(ENVIRONMENT_VARIABLES["MINIO_URL"],
                             access_key=ENVIRONMENT_VARIABLES["MINIO_ACCESS_KEY"],
                             secret_key=ENVIRONMENT_VARIABLES["MINIO_SECRET_KEY"],
                             secure=True)

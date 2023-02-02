@@ -22,7 +22,7 @@ class AnalysisService():
         self.tid = "f112abc4-d49a-4bc9-a058-ddbe2c0bd2ab"
         self.uid = "d700bcda-90c9-436e-932b-75174b65f399"
         self.temp_folder = tempfile.gettempdir()
-        self.client = Minio(ENVIRONMENT_VARIABLES["MINIO_ENDPOINT"],
+        self.client = Minio(ENVIRONMENT_VARIABLES["MINIO_URL"],
                             access_key=ENVIRONMENT_VARIABLES["MINIO_ACCESS_KEY"],
                             secret_key=ENVIRONMENT_VARIABLES["MINIO_SECRET_KEY"],
                             secure=True)

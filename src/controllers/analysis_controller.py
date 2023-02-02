@@ -23,10 +23,9 @@ class AnalysisController():
 
     def __init__(self):
         self.tid = "f112abc4-d49a-4bc9-a058-ddbe2c0bd2ab"
+        self.uid = "d700bcda-90c9-436e-932b-75174b65f399"
         self.message_id = str(uuid.uuid4())
         self.run_id = str(uuid.uuid4())
-        self.tid = "f112abc4-d49a-4bc9-a058-ddbe2c0bd2ab"
-        self.uid = "d700bcda-90c9-436e-932b-75174b65f399"
         self.messages_service = MessagesService(self.tid, self.uid, "analyses")
 
     @router.post("/api/analysis")

@@ -11,7 +11,7 @@ import src.services.logservice as log
 class QualityReportsRepository():
     def __init__(self, tid: str):
         """Initial shared data"""
-        self.client = Minio(ENVIRONMENT_VARIABLES["MINIO_ENDPOINT"],
+        self.client = Minio(ENVIRONMENT_VARIABLES["MINIO_URL"],
                             access_key=ENVIRONMENT_VARIABLES["MINIO_ACCESS_KEY"],
                             secret_key=ENVIRONMENT_VARIABLES["MINIO_SECRET_KEY"],
                             secure=True)

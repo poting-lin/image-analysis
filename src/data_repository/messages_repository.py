@@ -5,8 +5,8 @@ from src.config import ENVIRONMENT_VARIABLES
 class MessagesRepository:
     def __init__(self):
         self.client = pymongo.MongoClient(
-            ENVIRONMENT_VARIABLES["MONGO_ENDPOINT"])
-        database = f"db{ENVIRONMENT_VARIABLES['ENV']}"
+            ENVIRONMENT_VARIABLES["MONGO_URL"])
+        database = ENVIRONMENT_VARIABLES["MONGO_DB_URI"]
         self.mongo_db = self.client[database]
 
     def check_if_collection_exists(self, collection_name: str):

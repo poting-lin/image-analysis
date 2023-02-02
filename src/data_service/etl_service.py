@@ -7,7 +7,7 @@ class EtlService():
     def __init__(self):
         """Initial shared data"""
         self.etl_repository = EtlRepository(
-            ENVIRONMENT_VARIABLES["MINIO_ENDPOINT"], ENVIRONMENT_VARIABLES["MINIO_ACCESS_KEY"], ENVIRONMENT_VARIABLES["MINIO_SECRET_KEY"])
+            ENVIRONMENT_VARIABLES["MINIO_URL"], ENVIRONMENT_VARIABLES["MINIO_ACCESS_KEY"], ENVIRONMENT_VARIABLES["MINIO_SECRET_KEY"])
 
     def get_all_objects_in_raw(self):
         return self.etl_repository.get_all_objects("raw")
