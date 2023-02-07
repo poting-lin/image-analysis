@@ -7,15 +7,9 @@ This is a service to trigger image analysis process.
 
 ### Dependencies
 
-- Python 3.8.x
+- Python 3.9.x
 - Pyenv
 - Docker
-
-## How to run it
-There are 3 ways to run the application:
-* Run locally
-* Deploy to local docker and run it locally
-* Deploy to docker in cloud and run it from cloud
 
 for development purpose, we consider you want to run locally:
 
@@ -25,15 +19,10 @@ content in progress
 
 #### 2. Apply a virtual environment for Python
 
-It is recommended to use a virtual environment to isolate a given Python version and the project dependencies from the system Python and other projects.
+It is recommended to use a virtual environment to keep a given Python version and the project dependencies from the system Python and other projects.
 There are several virtual environment managers (`venv`, `virtualenv`, `pyenv`, `pipenv`, `conda`...) and the developer is free to choose among them.
 
-For convenience, below we provide instructions on how to set up this project using `pyenv`.
-For a deeper understanding of `pyenv`, check out [Managing Multiple Python Versions With pyenv](https://realpython.com/intro-to-pyenv/).
-
-
 Run the commands below in the **root project folder** to build a virtual environment:
-##### Option 1: venv
 ###### a way manage and control virtual environment in the same repo folder
 ```
 brew install pyenv pyenv-virtualenv
