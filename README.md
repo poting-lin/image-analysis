@@ -26,8 +26,8 @@ Run the commands below in the **root project folder** to build a virtual environ
 ###### a way manage and control virtual environment in the same repo folder
 ```
 brew install pyenv pyenv-virtualenv
-pyenv install 3.8.9
-pyenv local 3.8.9
+pyenv install 3.9.12
+pyenv local 3.9.12
 python -m venv .venv
 python -m pip install --upgrade pip
 source .venv/bin/activate
